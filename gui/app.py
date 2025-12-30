@@ -94,7 +94,7 @@ wipe_temp()
 # ══════════════════════════════════════════════════════════════════════════════
 
 class WinUI:
-    """Windows 11 WinUI 3 Design Tokens"""
+    """Windows 11 WinUI 3 Design Tokens - Solid colors for reliability"""
     # Accent Colors
     ACCENT_DEFAULT = "#0078D4"
     ACCENT_LIGHT_1 = "#429CE3"
@@ -104,39 +104,41 @@ class WinUI:
     ACCENT_DARK_2 = "#004578"
     ACCENT_DARK_3 = "#003258"
     
-    # Text Colors (Dark Theme)
-    TEXT_PRIMARY = "rgba(255, 255, 255, 1.0)"
-    TEXT_SECONDARY = "rgba(255, 255, 255, 0.786)"
-    TEXT_TERTIARY = "rgba(255, 255, 255, 0.545)"
-    TEXT_DISABLED = "rgba(255, 255, 255, 0.363)"
+    # Text Colors (Dark Theme) - Solid hex for reliability
+    TEXT_PRIMARY = "#FFFFFF"
+    TEXT_SECONDARY = "#C8C8C8"
+    TEXT_TERTIARY = "#8B8B8B"
+    TEXT_DISABLED = "#5C5C5C"
     TEXT_ON_ACCENT = "#000000"
     
-    # Fill Colors (Dark Theme)
-    FILL_CONTROL_DEFAULT = "rgba(255, 255, 255, 0.0605)"
-    FILL_CONTROL_SECONDARY = "rgba(255, 255, 255, 0.0837)"
-    FILL_CONTROL_TERTIARY = "rgba(255, 255, 255, 0.0326)"
-    FILL_CONTROL_DISABLED = "rgba(255, 255, 255, 0.0419)"
+    # Fill Colors (Dark Theme) - Solid colors
+    FILL_CONTROL_DEFAULT = "#3D3D3D"
+    FILL_CONTROL_SECONDARY = "#454545"
+    FILL_CONTROL_TERTIARY = "#363636"
+    FILL_CONTROL_DISABLED = "#2D2D2D"
     FILL_SUBTLE_TRANSPARENT = "transparent"
-    FILL_SUBTLE_SECONDARY = "rgba(255, 255, 255, 0.0605)"
-    FILL_SUBTLE_TERTIARY = "rgba(255, 255, 255, 0.0419)"
+    FILL_SUBTLE_SECONDARY = "#383838"
+    FILL_SUBTLE_TERTIARY = "#323232"
     
-    # Background Colors (Dark Theme)
-    BG_CARD = "rgba(255, 255, 255, 0.0512)"
-    BG_CARD_SECONDARY = "rgba(255, 255, 255, 0.0326)"
-    BG_SMOKE = "rgba(0, 0, 0, 0.3)"
-    BG_LAYER = "rgba(58, 58, 58, 0.3)"
-    BG_LAYER_ALT = "rgba(255, 255, 255, 0.0538)"
+    # Background Colors (Dark Theme) - Solid colors
+    BG_CARD = "#2D2D2D"
+    BG_CARD_SECONDARY = "#292929"
+    BG_SMOKE = "#1A1A1A"
+    BG_LAYER = "#252525"
+    BG_LAYER_ALT = "#2A2A2A"
     BG_SOLID_BASE = "#202020"
     BG_SOLID_SECONDARY = "#1C1C1C"
     BG_SOLID_TERTIARY = "#282828"
-    BG_MICA = "rgba(32, 32, 32, 0.8)"
+    BG_MICA = "#202020"
+    BG_WINDOW = "#1F1F1F"
+    BG_NAV = "#2B2B2B"
     
-    # Stroke Colors (Dark Theme)
-    STROKE_CONTROL = "rgba(255, 255, 255, 0.0698)"
-    STROKE_CONTROL_STRONG = "rgba(255, 255, 255, 0.545)"
-    STROKE_SURFACE = "rgba(117, 117, 117, 0.4)"
-    STROKE_DIVIDER = "rgba(255, 255, 255, 0.0837)"
-    STROKE_CARD = "rgba(0, 0, 0, 0.1)"
+    # Stroke Colors (Dark Theme) - Solid colors
+    STROKE_CONTROL = "#454545"
+    STROKE_CONTROL_STRONG = "#8B8B8B"
+    STROKE_SURFACE = "#3D3D3D"
+    STROKE_DIVIDER = "#3A3A3A"
+    STROKE_CARD = "#383838"
     STROKE_FOCUS = "#FFFFFF"
     
     # System Colors
@@ -144,6 +146,7 @@ class WinUI:
     SUCCESS = "#6CCB5F"
     CAUTION = "#FCE100"
     CRITICAL = "#FF99A4"
+    CRITICAL_BG = "#442726"
     
     # Animation Timing (Windows 11 Motion)
     ANIM_FAST = 83
@@ -154,8 +157,6 @@ class WinUI:
     # Easing Curves
     @staticmethod
     def ease_out():
-        curve = QEasingCurve(QEasingCurve.BezierSpline)
-        curve.addCubicBezierSegment(QPoint(0, 0), QPoint(0, 100), QPoint(100, 100))
         return QEasingCurve.OutCubic
     
     @staticmethod
@@ -237,37 +238,45 @@ def get_stylesheet():
     }}
     
     QMainWindow {{
-        background: transparent;
+        background: {WinUI.BG_WINDOW};
     }}
     
     QWidget#centralWidget {{
-        background: {WinUI.BG_MICA};
+        background: {WinUI.BG_WINDOW};
+    }}
+    
+    QWidget#navPane {{
+        background: {WinUI.BG_NAV};
+    }}
+    
+    QWidget#contentArea {{
+        background: {WinUI.BG_WINDOW};
     }}
     
     QScrollArea {{
-        background: transparent;
+        background: {WinUI.BG_WINDOW};
         border: none;
     }}
     
     QScrollArea > QWidget > QWidget {{
-        background: transparent;
+        background: {WinUI.BG_WINDOW};
     }}
     
     QScrollBar:vertical {{
-        background: transparent;
+        background: {WinUI.BG_WINDOW};
         width: 14px;
         margin: 0;
     }}
     
     QScrollBar::handle:vertical {{
-        background: rgba(255, 255, 255, 0.2);
+        background: {WinUI.FILL_SUBTLE_SECONDARY};
         border-radius: 3px;
         min-height: 30px;
         margin: 3px 4px 3px 4px;
     }}
     
     QScrollBar::handle:vertical:hover {{
-        background: rgba(255, 255, 255, 0.35);
+        background: {WinUI.FILL_CONTROL_SECONDARY};
     }}
     
     QScrollBar::add-line:vertical,
@@ -290,39 +299,45 @@ def get_stylesheet():
         font-size: 28px;
         font-weight: 600;
         color: {WinUI.TEXT_PRIMARY};
+        background: transparent;
     }}
     
     QLabel#subtitle {{
         font-size: 20px;
         font-weight: 600;
         color: {WinUI.TEXT_PRIMARY};
+        background: transparent;
     }}
     
     QLabel#bodyStrong {{
         font-size: 14px;
         font-weight: 600;
         color: {WinUI.TEXT_PRIMARY};
+        background: transparent;
     }}
     
     QLabel#body {{
         font-size: 14px;
         color: {WinUI.TEXT_PRIMARY};
+        background: transparent;
     }}
     
     QLabel#caption {{
         font-size: 12px;
         color: {WinUI.TEXT_SECONDARY};
+        background: transparent;
     }}
     
     QLabel#captionDim {{
         font-size: 12px;
         color: {WinUI.TEXT_TERTIARY};
+        background: transparent;
     }}
     
     QLineEdit {{
         background: {WinUI.FILL_CONTROL_DEFAULT};
         border: 1px solid {WinUI.STROKE_CONTROL};
-        border-bottom: 1px solid {WinUI.STROKE_CONTROL_STRONG};
+        border-bottom: 2px solid {WinUI.STROKE_CONTROL_STRONG};
         border-radius: {WinUI.CONTROL_CORNER_RADIUS}px;
         padding: 5px 11px;
         color: {WinUI.TEXT_PRIMARY};
@@ -342,7 +357,7 @@ def get_stylesheet():
     QLineEdit:disabled {{
         background: {WinUI.FILL_CONTROL_DISABLED};
         color: {WinUI.TEXT_DISABLED};
-        border-color: transparent;
+        border: 1px solid {WinUI.STROKE_CONTROL};
     }}
     
     QTextEdit {{
@@ -355,7 +370,7 @@ def get_stylesheet():
     }}
     
     QTextEdit:focus {{
-        border-bottom: 2px solid {WinUI.ACCENT_DEFAULT};
+        border: 1px solid {WinUI.ACCENT_DEFAULT};
     }}
     
     QListWidget {{
@@ -371,6 +386,7 @@ def get_stylesheet():
         padding: 8px 12px;
         border-radius: {WinUI.CONTROL_CORNER_RADIUS}px;
         margin: 2px 0;
+        background: transparent;
     }}
     
     QListWidget::item:hover {{
@@ -378,24 +394,28 @@ def get_stylesheet():
     }}
     
     QListWidget::item:selected {{
-        background: {WinUI.FILL_SUBTLE_TERTIARY};
+        background: {WinUI.ACCENT_DARK_1};
         color: {WinUI.TEXT_PRIMARY};
     }}
     
     QFrame#card {{
         background: {WinUI.BG_CARD};
-        border: 1px solid {WinUI.STROKE_CONTROL};
+        border: 1px solid {WinUI.STROKE_CARD};
         border-radius: {WinUI.CARD_CORNER_RADIUS}px;
     }}
     
     QFrame#cardAlt {{
         background: {WinUI.BG_CARD_SECONDARY};
-        border: 1px solid {WinUI.STROKE_CONTROL};
+        border: 1px solid {WinUI.STROKE_CARD};
         border-radius: {WinUI.CARD_CORNER_RADIUS}px;
     }}
     
     QFrame#separator {{
         background: {WinUI.STROKE_DIVIDER};
+    }}
+    
+    QWidget#settingsRow {{
+        background: transparent;
     }}
     """
 
@@ -773,9 +793,9 @@ class Win11Flyout(QFrame):
         p = QPainter(self)
         p.setRenderHint(QPainter.Antialiasing)
         
-        # Background
+        # Background - solid color
         p.setBrush(QColor(WinUI.BG_SOLID_TERTIARY))
-        p.setPen(QPen(QColor(255, 255, 255, int(255 * 0.0837)), 1))
+        p.setPen(QPen(QColor(WinUI.STROKE_CONTROL), 1))
         p.drawRoundedRect(self.rect().adjusted(1, 1, -1, -1), WinUI.OVERLAY_CORNER_RADIUS, WinUI.OVERLAY_CORNER_RADIUS)
     
     def show_at(self, pos, width):
@@ -863,13 +883,13 @@ class Win11NavButton(QPushButton):
         p = QPainter(self)
         p.setRenderHint(QPainter.Antialiasing)
         
-        # Background
+        # Background - solid colors
         if self._selected:
-            p.setBrush(QColor(255, 255, 255, int(255 * 0.0605)))
+            p.setBrush(QColor(WinUI.FILL_SUBTLE_SECONDARY))
             p.setPen(Qt.NoPen)
             p.drawRoundedRect(4, 0, self.width() - 8, self.height(), WinUI.CONTROL_CORNER_RADIUS, WinUI.CONTROL_CORNER_RADIUS)
         elif self.underMouse():
-            p.setBrush(QColor(255, 255, 255, int(255 * 0.0419)))
+            p.setBrush(QColor(WinUI.FILL_SUBTLE_TERTIARY))
             p.setPen(Qt.NoPen)
             p.drawRoundedRect(4, 0, self.width() - 8, self.height(), WinUI.CONTROL_CORNER_RADIUS, WinUI.CONTROL_CORNER_RADIUS)
         
@@ -997,18 +1017,15 @@ class Win11HeroCard(QFrame):
         self.setFixedHeight(100)
         self.setCursor(Qt.PointingHandCursor)
         
+        # Solid background with accent tint
         self.setStyleSheet(f"""
             QFrame {{
-                background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-                    stop:0 rgba(0, 120, 212, 0.15), 
-                    stop:1 rgba(0, 120, 212, 0.05));
-                border: 1px solid {WinUI.STROKE_CONTROL};
+                background: #1E3A5F;
+                border: 1px solid {WinUI.STROKE_CARD};
                 border-radius: {WinUI.CARD_CORNER_RADIUS}px;
             }}
             QFrame:hover {{
-                background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-                    stop:0 rgba(0, 120, 212, 0.2), 
-                    stop:1 rgba(0, 120, 212, 0.08));
+                background: #234568;
             }}
         """)
         
@@ -1130,17 +1147,18 @@ class MainWindow(QMainWindow):
         root_layout.setContentsMargins(0, 0, 0, 0)
         root_layout.setSpacing(0)
         
-        # Navigation Pane
+        # Navigation Pane - solid background
         nav_pane = QFrame()
+        nav_pane.setObjectName("navPane")
         nav_pane.setFixedWidth(280)
-        nav_pane.setStyleSheet("background: transparent;")
+        nav_pane.setStyleSheet(f"QFrame#navPane {{ background: {WinUI.BG_NAV}; }}")
         nav_layout = QVBoxLayout(nav_pane)
         nav_layout.setContentsMargins(12, 12, 12, 12)
         nav_layout.setSpacing(4)
         
         # App title in nav
         app_title = QLabel("Auto Post Engine")
-        app_title.setStyleSheet(f"color: {WinUI.TEXT_PRIMARY}; font-size: 20px; font-weight: 600; padding: 8px 12px;")
+        app_title.setStyleSheet(f"color: {WinUI.TEXT_PRIMARY}; font-size: 20px; font-weight: 600; padding: 8px 12px; background: transparent;")
         nav_layout.addWidget(app_title)
         
         nav_layout.addSpacing(8)
@@ -1155,7 +1173,7 @@ class MainWindow(QMainWindow):
         
         # Navigation buttons container (for indicator positioning)
         nav_buttons_container = QWidget()
-        nav_buttons_container.setStyleSheet("background: transparent;")
+        nav_buttons_container.setStyleSheet(f"background: {WinUI.BG_NAV};")
         nav_buttons_layout = QVBoxLayout(nav_buttons_container)
         nav_buttons_layout.setContentsMargins(0, 0, 0, 0)
         nav_buttons_layout.setSpacing(4)
@@ -1183,7 +1201,7 @@ class MainWindow(QMainWindow):
         # Status at bottom
         self.status_label = QLabel(f"{FluentIcons.CHECKMARK} Ready")
         self.status_label.setObjectName("captionDim")
-        self.status_label.setStyleSheet(f"color: {WinUI.TEXT_TERTIARY}; font-size: 12px; padding: 8px 12px;")
+        self.status_label.setStyleSheet(f"color: {WinUI.TEXT_TERTIARY}; font-size: 12px; padding: 8px 12px; background: transparent;")
         nav_layout.addWidget(self.status_label)
         
         root_layout.addWidget(nav_pane)
@@ -1191,12 +1209,12 @@ class MainWindow(QMainWindow):
         # Separator
         separator = QFrame()
         separator.setFixedWidth(1)
-        separator.setObjectName("separator")
+        separator.setStyleSheet(f"background: {WinUI.STROKE_DIVIDER};")
         root_layout.addWidget(separator)
         
-        # Content area
+        # Content area - solid background
         self.content_stack = QStackedWidget()
-        self.content_stack.setStyleSheet("background: transparent;")
+        self.content_stack.setStyleSheet(f"background: {WinUI.BG_WINDOW};")
         
         # Opacity effect for transitions
         self.content_opacity = QGraphicsOpacityEffect(self.content_stack)
@@ -1264,9 +1282,10 @@ class MainWindow(QMainWindow):
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
         scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        scroll.setStyleSheet(f"QScrollArea {{ background: {WinUI.BG_WINDOW}; border: none; }}")
         
         content = QWidget()
-        content.setStyleSheet("background: transparent;")
+        content.setStyleSheet(f"background: {WinUI.BG_WINDOW};")
         layout = QVBoxLayout(content)
         layout.setContentsMargins(32, 24, 32, 24)
         layout.setSpacing(24)
@@ -1274,6 +1293,7 @@ class MainWindow(QMainWindow):
         # Page title
         title = QLabel("Home")
         title.setObjectName("title")
+        title.setStyleSheet(f"color: {WinUI.TEXT_PRIMARY}; font-size: 28px; font-weight: 600; background: transparent;")
         layout.addWidget(title)
         
         # Hero card
@@ -1436,18 +1456,19 @@ class MainWindow(QMainWindow):
         page_layout.addWidget(scroll)
     
     def _build_history_page(self, parent):
+        parent.setStyleSheet(f"background: {WinUI.BG_WINDOW};")
         layout = QVBoxLayout(parent)
         layout.setContentsMargins(32, 24, 32, 24)
         layout.setSpacing(16)
         
         # Title
         title = QLabel("History")
-        title.setObjectName("title")
+        title.setStyleSheet(f"color: {WinUI.TEXT_PRIMARY}; font-size: 28px; font-weight: 600; background: transparent;")
         layout.addWidget(title)
         
         # Subtitle
         subtitle = QLabel("View and export your posting history")
-        subtitle.setObjectName("caption")
+        subtitle.setStyleSheet(f"color: {WinUI.TEXT_SECONDARY}; font-size: 12px; background: transparent;")
         layout.addWidget(subtitle)
         
         layout.addSpacing(8)
@@ -1486,23 +1507,24 @@ class MainWindow(QMainWindow):
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
         scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        scroll.setStyleSheet(f"QScrollArea {{ background: {WinUI.BG_WINDOW}; border: none; }}")
         
         content = QWidget()
-        content.setStyleSheet("background: transparent;")
+        content.setStyleSheet(f"background: {WinUI.BG_WINDOW};")
         layout = QVBoxLayout(content)
         layout.setContentsMargins(32, 24, 32, 24)
         layout.setSpacing(24)
         
         # Title
         title = QLabel("Settings")
-        title.setObjectName("title")
+        title.setStyleSheet(f"color: {WinUI.TEXT_PRIMARY}; font-size: 28px; font-weight: 600; background: transparent;")
         layout.addWidget(title)
         
         # About card
         about_card = Win11Card("About")
         
         about_info = QLabel("Auto Post Engine v3.0\nWindows 11 Native UI with WinUI 3 Design")
-        about_info.setObjectName("body")
+        about_info.setStyleSheet(f"color: {WinUI.TEXT_PRIMARY}; background: transparent;")
         about_card.addWidget(about_info)
         
         layout.addWidget(about_card)
