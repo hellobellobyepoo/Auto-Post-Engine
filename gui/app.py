@@ -94,8 +94,11 @@ wipe_temp()
 # ══════════════════════════════════════════════════════════════════════════════
 
 class WinUI:
-    """Windows 11 WinUI 3 Design Tokens - Solid colors for reliability"""
-    # Accent Colors
+    """
+    Windows 11 WinUI 3 Design Tokens
+    Authentic Microsoft design system colors with Mica support
+    """
+    # Accent Colors (Windows 11 Default Blue)
     ACCENT_DEFAULT = "#0078D4"
     ACCENT_LIGHT_1 = "#429CE3"
     ACCENT_LIGHT_2 = "#6BB9F0"
@@ -104,57 +107,65 @@ class WinUI:
     ACCENT_DARK_2 = "#004578"
     ACCENT_DARK_3 = "#003258"
     
-    # Text Colors (Dark Theme) - Solid hex for reliability
-    TEXT_PRIMARY = "#FFFFFF"
-    TEXT_SECONDARY = "#C8C8C8"
-    TEXT_TERTIARY = "#8B8B8B"
-    TEXT_DISABLED = "#5C5C5C"
+    # Text Colors (Dark Theme) - Exact WinUI 3 values
+    TEXT_PRIMARY = "rgba(255, 255, 255, 1.0)"
+    TEXT_SECONDARY = "rgba(255, 255, 255, 0.786)"
+    TEXT_TERTIARY = "rgba(255, 255, 255, 0.545)"
+    TEXT_DISABLED = "rgba(255, 255, 255, 0.363)"
     TEXT_ON_ACCENT = "#000000"
     
-    # Fill Colors (Dark Theme) - Solid colors
-    FILL_CONTROL_DEFAULT = "#3D3D3D"
-    FILL_CONTROL_SECONDARY = "#454545"
-    FILL_CONTROL_TERTIARY = "#363636"
-    FILL_CONTROL_DISABLED = "#2D2D2D"
+    # Fill Colors (Dark Theme) - For controls on Mica
+    FILL_CONTROL_DEFAULT = "rgba(255, 255, 255, 0.0605)"
+    FILL_CONTROL_SECONDARY = "rgba(255, 255, 255, 0.0837)"
+    FILL_CONTROL_TERTIARY = "rgba(255, 255, 255, 0.0326)"
+    FILL_CONTROL_INPUT_ACTIVE = "rgba(30, 30, 30, 0.7)"
+    FILL_CONTROL_DISABLED = "rgba(255, 255, 255, 0.0419)"
     FILL_SUBTLE_TRANSPARENT = "transparent"
-    FILL_SUBTLE_SECONDARY = "#383838"
-    FILL_SUBTLE_TERTIARY = "#323232"
+    FILL_SUBTLE_SECONDARY = "rgba(255, 255, 255, 0.0605)"
+    FILL_SUBTLE_TERTIARY = "rgba(255, 255, 255, 0.0419)"
     
-    # Background Colors (Dark Theme) - Solid colors
-    BG_CARD = "#2D2D2D"
-    BG_CARD_SECONDARY = "#292929"
-    BG_SMOKE = "#1A1A1A"
-    BG_LAYER = "#252525"
-    BG_LAYER_ALT = "#2A2A2A"
+    # Background Colors (Dark Theme with Mica)
+    BG_MICA_BASE = "rgba(32, 32, 32, 0.0)"  # Transparent for Mica
+    BG_LAYER_DEFAULT = "rgba(58, 58, 58, 0.3)"
+    BG_LAYER_ALT = "rgba(255, 255, 255, 0.0538)"
+    BG_CARD_DEFAULT = "rgba(255, 255, 255, 0.0512)"
+    BG_CARD_SECONDARY = "rgba(255, 255, 255, 0.0326)"
+    BG_SMOKE = "rgba(0, 0, 0, 0.3)"
+    BG_ACRYLIC_DEFAULT = "rgba(44, 44, 44, 0.96)"
+    BG_ACRYLIC_BASE = "rgba(32, 32, 32, 0.9)"
+    
+    # Solid fallbacks (when Mica unavailable)
     BG_SOLID_BASE = "#202020"
     BG_SOLID_SECONDARY = "#1C1C1C"
     BG_SOLID_TERTIARY = "#282828"
-    BG_MICA = "#202020"
-    BG_WINDOW = "#1F1F1F"
-    BG_NAV = "#2B2B2B"
+    BG_SOLID_QUATERNARY = "#2C2C2C"
     
-    # Stroke Colors (Dark Theme) - Solid colors
-    STROKE_CONTROL = "#454545"
-    STROKE_CONTROL_STRONG = "#8B8B8B"
-    STROKE_SURFACE = "#3D3D3D"
-    STROKE_DIVIDER = "#3A3A3A"
-    STROKE_CARD = "#383838"
-    STROKE_FOCUS = "#FFFFFF"
+    # Stroke Colors (Dark Theme)
+    STROKE_CONTROL_DEFAULT = "rgba(255, 255, 255, 0.0698)"
+    STROKE_CONTROL_SECONDARY = "rgba(255, 255, 255, 0.093)"
+    STROKE_CONTROL_ON_ACCENT = "rgba(0, 0, 0, 0.14)"
+    STROKE_CONTROL_STRONG = "rgba(255, 255, 255, 0.545)"
+    STROKE_SURFACE = "rgba(117, 117, 117, 0.4)"
+    STROKE_DIVIDER = "rgba(255, 255, 255, 0.0837)"
+    STROKE_CARD = "rgba(0, 0, 0, 0.1)"
+    STROKE_FOCUS_OUTER = "#FFFFFF"
+    STROKE_FOCUS_INNER = "rgba(0, 0, 0, 0.7)"
     
     # System Colors
     ATTENTION = "#60CDFF"
     SUCCESS = "#6CCB5F"
     CAUTION = "#FCE100"
     CRITICAL = "#FF99A4"
-    CRITICAL_BG = "#442726"
+    CRITICAL_BG = "rgba(68, 39, 38, 0.7)"
     
-    # Animation Timing (Windows 11 Motion)
-    ANIM_FAST = 83
-    ANIM_NORMAL = 167
-    ANIM_SLOW = 333
-    ANIM_SLOWER = 500
+    # Animation Timing (Windows 11 Motion - exact values)
+    ANIM_FAST = 83      # Fast interactions
+    ANIM_NORMAL = 167   # Standard transitions
+    ANIM_SLOW = 250     # Emphasized transitions
+    ANIM_SLOWER = 333   # Page transitions
+    ANIM_SLOWEST = 500  # Large movements
     
-    # Easing Curves
+    # Easing Curves (Windows 11 Motion)
     @staticmethod
     def ease_out():
         return QEasingCurve.OutCubic
@@ -162,6 +173,10 @@ class WinUI:
     @staticmethod
     def ease_in_out():
         return QEasingCurve.InOutCubic
+    
+    @staticmethod
+    def ease_bounce():
+        return QEasingCurve.OutBack
     
     # Typography
     FONT_FAMILY = "Segoe UI Variable, Segoe UI, sans-serif"
@@ -174,13 +189,17 @@ class WinUI:
     FONT_BODY_STRONG = 14
     FONT_CAPTION = 12
     
-    # Sizing
+    # Sizing (exact Windows 11 values)
     CONTROL_HEIGHT = 32
     CONTROL_CORNER_RADIUS = 4
     CARD_CORNER_RADIUS = 8
     OVERLAY_CORNER_RADIUS = 8
     NAV_INDICATOR_WIDTH = 3
     NAV_INDICATOR_HEIGHT = 16
+    TOGGLE_WIDTH = 40
+    TOGGLE_HEIGHT = 20
+    TOGGLE_THUMB_SIZE = 12
+    TOGGLE_THUMB_HOVER = 14
 
 # ══════════════════════════════════════════════════════════════════════════════
 # WINDOWS 11 FLUENT ICONS (Segoe Fluent Icons)
@@ -230,7 +249,13 @@ class FluentIcons:
 # GLOBAL STYLESHEET (WINDOWS 11 WINUI 3)
 # ══════════════════════════════════════════════════════════════════════════════
 
-def get_stylesheet():
+def get_stylesheet(mica_enabled=False):
+    """Generate stylesheet with Mica-aware backgrounds"""
+    # Use transparent backgrounds when Mica is enabled, solid when not
+    bg_main = "transparent" if mica_enabled else WinUI.BG_SOLID_BASE
+    bg_nav = WinUI.BG_LAYER_DEFAULT if mica_enabled else WinUI.BG_SOLID_SECONDARY
+    bg_content = "transparent" if mica_enabled else WinUI.BG_SOLID_BASE
+    
     return f"""
     * {{
         font-family: 'Segoe UI Variable', 'Segoe UI', sans-serif;
@@ -238,32 +263,33 @@ def get_stylesheet():
     }}
     
     QMainWindow {{
-        background: {WinUI.BG_WINDOW};
+        background: {bg_main};
     }}
     
     QWidget#centralWidget {{
-        background: {WinUI.BG_WINDOW};
+        background: {bg_main};
     }}
     
     QWidget#navPane {{
-        background: {WinUI.BG_NAV};
+        background: {bg_nav};
+        border-right: 1px solid {WinUI.STROKE_DIVIDER};
     }}
     
     QWidget#contentArea {{
-        background: {WinUI.BG_WINDOW};
+        background: {bg_content};
     }}
     
     QScrollArea {{
-        background: {WinUI.BG_WINDOW};
+        background: transparent;
         border: none;
     }}
     
     QScrollArea > QWidget > QWidget {{
-        background: {WinUI.BG_WINDOW};
+        background: transparent;
     }}
     
     QScrollBar:vertical {{
-        background: {WinUI.BG_WINDOW};
+        background: transparent;
         width: 14px;
         margin: 0;
     }}
@@ -336,8 +362,8 @@ def get_stylesheet():
     
     QLineEdit {{
         background: {WinUI.FILL_CONTROL_DEFAULT};
-        border: 1px solid {WinUI.STROKE_CONTROL};
-        border-bottom: 2px solid {WinUI.STROKE_CONTROL_STRONG};
+        border: 1px solid {WinUI.STROKE_CONTROL_DEFAULT};
+        border-bottom: 1px solid {WinUI.STROKE_CONTROL_STRONG};
         border-radius: {WinUI.CONTROL_CORNER_RADIUS}px;
         padding: 5px 11px;
         color: {WinUI.TEXT_PRIMARY};
@@ -350,19 +376,20 @@ def get_stylesheet():
     }}
     
     QLineEdit:focus {{
-        background: {WinUI.FILL_CONTROL_TERTIARY};
+        background: {WinUI.FILL_CONTROL_INPUT_ACTIVE};
+        border: 1px solid {WinUI.STROKE_CONTROL_DEFAULT};
         border-bottom: 2px solid {WinUI.ACCENT_DEFAULT};
     }}
     
     QLineEdit:disabled {{
         background: {WinUI.FILL_CONTROL_DISABLED};
         color: {WinUI.TEXT_DISABLED};
-        border: 1px solid {WinUI.STROKE_CONTROL};
+        border: 1px solid transparent;
     }}
     
     QTextEdit {{
         background: {WinUI.FILL_CONTROL_DEFAULT};
-        border: 1px solid {WinUI.STROKE_CONTROL};
+        border: 1px solid {WinUI.STROKE_CONTROL_DEFAULT};
         border-radius: {WinUI.CONTROL_CORNER_RADIUS}px;
         padding: 8px 11px;
         color: {WinUI.TEXT_PRIMARY};
@@ -370,12 +397,14 @@ def get_stylesheet():
     }}
     
     QTextEdit:focus {{
-        border: 1px solid {WinUI.ACCENT_DEFAULT};
+        background: {WinUI.FILL_CONTROL_INPUT_ACTIVE};
+        border: 1px solid {WinUI.STROKE_CONTROL_DEFAULT};
+        border-bottom: 2px solid {WinUI.ACCENT_DEFAULT};
     }}
     
     QListWidget {{
         background: {WinUI.FILL_CONTROL_DEFAULT};
-        border: 1px solid {WinUI.STROKE_CONTROL};
+        border: 1px solid {WinUI.STROKE_CONTROL_DEFAULT};
         border-radius: {WinUI.CONTROL_CORNER_RADIUS}px;
         padding: 4px;
         color: {WinUI.TEXT_PRIMARY};
@@ -394,12 +423,12 @@ def get_stylesheet():
     }}
     
     QListWidget::item:selected {{
-        background: {WinUI.ACCENT_DARK_1};
+        background: {WinUI.FILL_SUBTLE_TERTIARY};
         color: {WinUI.TEXT_PRIMARY};
     }}
     
     QFrame#card {{
-        background: {WinUI.BG_CARD};
+        background: {WinUI.BG_CARD_DEFAULT};
         border: 1px solid {WinUI.STROKE_CARD};
         border-radius: {WinUI.CARD_CORNER_RADIUS}px;
     }}
@@ -424,7 +453,17 @@ def get_stylesheet():
 # ══════════════════════════════════════════════════════════════════════════════
 
 class Win11Toggle(QWidget):
-    """Authentic Windows 11 Toggle Switch with proper animations"""
+    """
+    Authentic Windows 11 Toggle Switch
+    Exact replica of WinUI 3 ToggleSwitch with proper animations
+    
+    Specs:
+    - Track: 40x20px, 10px corner radius
+    - Thumb: 12px (14px on hover), centered vertically
+    - Off state: transparent track with white border, white thumb
+    - On state: accent filled track, black thumb
+    - Animation: 167ms cubic-bezier for position, smooth thumb scaling
+    """
     toggled = Signal(bool)
     
     def __init__(self, checked=False, parent=None):
@@ -433,12 +472,14 @@ class Win11Toggle(QWidget):
         self._hover = False
         self._pressed = False
         
-        # Animation properties
-        self._thumb_x = 22.0 if checked else 4.0
-        self._thumb_scale = 1.0
-        self._track_opacity = 1.0 if checked else 0.0
+        # Animation properties - exact Windows 11 positions
+        # Off: thumb at x=10 (center of left side)
+        # On: thumb at x=30 (center of right side)
+        self._thumb_x = 30.0 if checked else 10.0
+        self._thumb_width = 12.0  # Animates to stretched during transition
+        self._track_fill = 1.0 if checked else 0.0
         
-        self.setFixedSize(40, 20)
+        self.setFixedSize(WinUI.TOGGLE_WIDTH, WinUI.TOGGLE_HEIGHT)
         self.setCursor(Qt.PointingHandCursor)
         
         # Thumb position animation
@@ -446,27 +487,28 @@ class Win11Toggle(QWidget):
         self._thumb_anim.setDuration(WinUI.ANIM_NORMAL)
         self._thumb_anim.setEasingCurve(QEasingCurve.OutCubic)
         
-        # Thumb scale animation (for press effect)
-        self._scale_anim = QPropertyAnimation(self, b"thumbScale", self)
-        self._scale_anim.setDuration(WinUI.ANIM_FAST)
-        self._scale_anim.setEasingCurve(QEasingCurve.OutCubic)
+        # Thumb width animation (stretch effect)
+        self._width_anim = QPropertyAnimation(self, b"thumbWidth", self)
+        self._width_anim.setDuration(WinUI.ANIM_NORMAL)
+        self._width_anim.setEasingCurve(QEasingCurve.OutCubic)
         
         # Track fill animation
-        self._track_anim = QPropertyAnimation(self, b"trackOpacity", self)
-        self._track_anim.setDuration(WinUI.ANIM_NORMAL)
-        self._track_anim.setEasingCurve(QEasingCurve.OutCubic)
+        self._fill_anim = QPropertyAnimation(self, b"trackFill", self)
+        self._fill_anim.setDuration(WinUI.ANIM_NORMAL)
+        self._fill_anim.setEasingCurve(QEasingCurve.OutCubic)
     
+    # Properties for animation
     def get_thumb_x(self): return self._thumb_x
     def set_thumb_x(self, v): self._thumb_x = v; self.update()
     thumbX = Property(float, get_thumb_x, set_thumb_x)
     
-    def get_thumb_scale(self): return self._thumb_scale
-    def set_thumb_scale(self, v): self._thumb_scale = v; self.update()
-    thumbScale = Property(float, get_thumb_scale, set_thumb_scale)
+    def get_thumb_width(self): return self._thumb_width
+    def set_thumb_width(self, v): self._thumb_width = v; self.update()
+    thumbWidth = Property(float, get_thumb_width, set_thumb_width)
     
-    def get_track_opacity(self): return self._track_opacity
-    def set_track_opacity(self, v): self._track_opacity = v; self.update()
-    trackOpacity = Property(float, get_track_opacity, set_track_opacity)
+    def get_track_fill(self): return self._track_fill
+    def set_track_fill(self, v): self._track_fill = v; self.update()
+    trackFill = Property(float, get_track_fill, set_track_fill)
     
     def isChecked(self): return self._checked
     
@@ -476,23 +518,35 @@ class Win11Toggle(QWidget):
             if animate:
                 self._animate_toggle()
             else:
-                self._thumb_x = 22.0 if checked else 4.0
-                self._track_opacity = 1.0 if checked else 0.0
+                self._thumb_x = 30.0 if checked else 10.0
+                self._thumb_width = 12.0
+                self._track_fill = 1.0 if checked else 0.0
                 self.update()
             self.toggled.emit(checked)
     
     def _animate_toggle(self):
-        # Thumb position
+        # Stop all animations
         self._thumb_anim.stop()
+        self._width_anim.stop()
+        self._fill_anim.stop()
+        
+        # Thumb position
         self._thumb_anim.setStartValue(self._thumb_x)
-        self._thumb_anim.setEndValue(22.0 if self._checked else 4.0)
-        self._thumb_anim.start()
+        self._thumb_anim.setEndValue(30.0 if self._checked else 10.0)
+        
+        # Thumb stretch effect - Windows 11 stretches thumb during transition
+        self._width_anim.setStartValue(12.0)
+        self._width_anim.setKeyValueAt(0.3, 17.0)  # Stretch at 30%
+        self._width_anim.setEndValue(12.0)
         
         # Track fill
-        self._track_anim.stop()
-        self._track_anim.setStartValue(self._track_opacity)
-        self._track_anim.setEndValue(1.0 if self._checked else 0.0)
-        self._track_anim.start()
+        self._fill_anim.setStartValue(self._track_fill)
+        self._fill_anim.setEndValue(1.0 if self._checked else 0.0)
+        
+        # Start all animations
+        self._thumb_anim.start()
+        self._width_anim.start()
+        self._fill_anim.start()
     
     def enterEvent(self, event):
         self._hover = True
@@ -505,112 +559,130 @@ class Win11Toggle(QWidget):
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
             self._pressed = True
-            self._scale_anim.stop()
-            self._scale_anim.setStartValue(self._thumb_scale)
-            self._scale_anim.setEndValue(0.85)
-            self._scale_anim.start()
             self.update()
     
     def mouseReleaseEvent(self, event):
         if event.button() == Qt.LeftButton and self._pressed:
             self._pressed = False
-            self._scale_anim.stop()
-            self._scale_anim.setStartValue(self._thumb_scale)
-            self._scale_anim.setEndValue(1.0)
-            self._scale_anim.start()
-            
             if self.rect().contains(event.pos()):
                 self.setChecked(not self._checked)
+            self.update()
     
     def paintEvent(self, event):
         p = QPainter(self)
         p.setRenderHint(QPainter.Antialiasing)
         
-        # Track dimensions
-        track_rect = QRect(0, 0, 40, 20)
+        w, h = self.width(), self.height()
         
-        # Draw track background (off state)
-        p.setPen(QPen(QColor(255, 255, 255, int(255 * 0.545)), 1))
-        p.setBrush(Qt.NoBrush)
-        p.drawRoundedRect(track_rect.adjusted(1, 1, -1, -1), 10, 10)
-        
-        # Draw track fill (on state) with opacity animation
-        if self._track_opacity > 0:
-            accent = QColor(WinUI.ACCENT_DEFAULT)
-            accent.setAlphaF(self._track_opacity)
+        # Track colors based on state
+        if self._track_fill > 0:
+            # Interpolate between off and on colors
+            if self._hover:
+                track_color = QColor("#1A86D8") if self._track_fill > 0.5 else QColor(255, 255, 255, int(255 * 0.08))
+            elif self._pressed:
+                track_color = QColor("#0067B8") if self._track_fill > 0.5 else QColor(255, 255, 255, int(255 * 0.04))
+            else:
+                track_color = QColor(WinUI.ACCENT_DEFAULT)
+            track_color.setAlphaF(self._track_fill)
+            
+            # Draw filled track
             p.setPen(Qt.NoPen)
-            p.setBrush(accent)
-            p.drawRoundedRect(track_rect, 10, 10)
+            p.setBrush(track_color)
+            p.drawRoundedRect(0, 0, w, h, h/2, h/2)
         
-        # Thumb
-        thumb_size = 12 * self._thumb_scale
+        # Draw track border (always visible, fades out when on)
+        border_alpha = int(255 * 0.545 * (1.0 - self._track_fill))
+        if border_alpha > 0 or self._track_fill < 1.0:
+            if self._track_fill < 0.5:
+                # Off state border
+                if self._hover:
+                    p.setPen(QPen(QColor(255, 255, 255, int(255 * 0.786)), 1.5))
+                elif self._pressed:
+                    p.setPen(QPen(QColor(255, 255, 255, int(255 * 0.545)), 1.5))
+                else:
+                    p.setPen(QPen(QColor(255, 255, 255, int(255 * 0.545)), 1.5))
+                p.setBrush(Qt.NoBrush)
+                p.drawRoundedRect(1, 1, w-2, h-2, (h-2)/2, (h-2)/2)
+        
+        # Thumb size - grows on hover
+        base_size = WinUI.TOGGLE_THUMB_SIZE
         if self._hover and not self._pressed:
-            thumb_size = 14 * self._thumb_scale
+            thumb_h = WinUI.TOGGLE_THUMB_HOVER
+        else:
+            thumb_h = base_size
         
-        thumb_y = (20 - thumb_size) / 2
-        thumb_x = self._thumb_x - thumb_size / 2 + 6
+        # Thumb width (for stretch animation)
+        thumb_w = self._thumb_width
+        if self._hover and not self._pressed:
+            thumb_w = max(thumb_w, 14.0)
+        
+        # Thumb position - centered on _thumb_x
+        thumb_x = self._thumb_x - thumb_w / 2
+        thumb_y = (h - thumb_h) / 2
         
         # Thumb color
-        if self._checked:
-            p.setBrush(QColor(WinUI.TEXT_ON_ACCENT))
+        if self._track_fill > 0.5:
+            # On state - black thumb
+            thumb_color = QColor(WinUI.TEXT_ON_ACCENT)
         else:
-            p.setBrush(QColor(255, 255, 255))
+            # Off state - white thumb
+            thumb_color = QColor(255, 255, 255)
         
+        # Draw thumb with rounded rect (pill shape when stretched)
         p.setPen(Qt.NoPen)
-        p.drawEllipse(int(thumb_x), int(thumb_y), int(thumb_size), int(thumb_size))
+        p.setBrush(thumb_color)
+        radius = thumb_h / 2
+        p.drawRoundedRect(int(thumb_x), int(thumb_y), int(thumb_w), int(thumb_h), radius, radius)
 
 
 class Win11Button(QPushButton):
-    """Windows 11 styled button with proper hover/press animations"""
+    """
+    Windows 11 styled button with proper hover/press states
+    Matches WinUI 3 Button control exactly
+    """
     
     def __init__(self, text="", icon=None, accent=False, parent=None):
         super().__init__(text, parent)
         self._accent = accent
         self._icon = icon
-        self._hover = False
-        self._pressed = False
-        self._opacity = 1.0
         
         self.setFixedHeight(WinUI.CONTROL_HEIGHT)
         self.setCursor(Qt.PointingHandCursor)
         self._update_style()
-        
-        # Opacity effect for press animation
-        self._opacity_effect = QGraphicsOpacityEffect(self)
-        self._opacity_effect.setOpacity(1.0)
-        self.setGraphicsEffect(self._opacity_effect)
-        
-        self._press_anim = QPropertyAnimation(self._opacity_effect, b"opacity", self)
-        self._press_anim.setDuration(WinUI.ANIM_FAST)
-        self._press_anim.setEasingCurve(QEasingCurve.OutCubic)
     
     def _update_style(self):
         if self._accent:
+            # Accent button (primary action)
             self.setStyleSheet(f"""
                 QPushButton {{
                     background: {WinUI.ACCENT_DEFAULT};
-                    border: none;
+                    border: 1px solid {WinUI.STROKE_CONTROL_ON_ACCENT};
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
                     border-radius: {WinUI.CONTROL_CORNER_RADIUS}px;
                     color: {WinUI.TEXT_ON_ACCENT};
                     font-weight: 600;
                     padding: 0 16px;
                 }}
                 QPushButton:hover {{
-                    background: {WinUI.ACCENT_LIGHT_1};
+                    background: #1A86D8;
                 }}
                 QPushButton:pressed {{
-                    background: {WinUI.ACCENT_DARK_1};
+                    background: #0067B8;
+                    border-bottom: 1px solid {WinUI.STROKE_CONTROL_ON_ACCENT};
+                    color: rgba(0, 0, 0, 0.6);
                 }}
                 QPushButton:disabled {{
                     background: {WinUI.FILL_CONTROL_DISABLED};
+                    border: 1px solid transparent;
                     color: {WinUI.TEXT_DISABLED};
                 }}
             """)
         else:
+            # Standard button
             self.setStyleSheet(f"""
                 QPushButton {{
                     background: {WinUI.FILL_CONTROL_DEFAULT};
-                    border: 1px solid {WinUI.STROKE_CONTROL};
+                    border: 1px solid {WinUI.STROKE_CONTROL_DEFAULT};
                     border-bottom: 1px solid {WinUI.STROKE_CONTROL_STRONG};
                     border-radius: {WinUI.CONTROL_CORNER_RADIUS}px;
                     color: {WinUI.TEXT_PRIMARY};
@@ -621,36 +693,15 @@ class Win11Button(QPushButton):
                 }}
                 QPushButton:pressed {{
                     background: {WinUI.FILL_CONTROL_TERTIARY};
-                    border-bottom: 1px solid {WinUI.STROKE_CONTROL};
+                    border-bottom: 1px solid {WinUI.STROKE_CONTROL_DEFAULT};
+                    color: {WinUI.TEXT_SECONDARY};
                 }}
                 QPushButton:disabled {{
                     background: {WinUI.FILL_CONTROL_DISABLED};
+                    border: 1px solid transparent;
                     color: {WinUI.TEXT_DISABLED};
-                    border-color: transparent;
                 }}
             """)
-    
-    def enterEvent(self, event):
-        self._hover = True
-        super().enterEvent(event)
-    
-    def leaveEvent(self, event):
-        self._hover = False
-        super().leaveEvent(event)
-    
-    def mousePressEvent(self, event):
-        self._press_anim.stop()
-        self._press_anim.setStartValue(1.0)
-        self._press_anim.setEndValue(0.9)
-        self._press_anim.start()
-        super().mousePressEvent(event)
-    
-    def mouseReleaseEvent(self, event):
-        self._press_anim.stop()
-        self._press_anim.setStartValue(self._opacity_effect.opacity())
-        self._press_anim.setEndValue(1.0)
-        self._press_anim.start()
-        super().mouseReleaseEvent(event)
 
 
 class Win11IconButton(QPushButton):
@@ -883,28 +934,32 @@ class Win11NavButton(QPushButton):
         p = QPainter(self)
         p.setRenderHint(QPainter.Antialiasing)
         
-        # Background - solid colors
+        # Background - semi-transparent for Mica compatibility
         if self._selected:
-            p.setBrush(QColor(WinUI.FILL_SUBTLE_SECONDARY))
+            p.setBrush(QColor(255, 255, 255, int(255 * 0.0605)))
             p.setPen(Qt.NoPen)
             p.drawRoundedRect(4, 0, self.width() - 8, self.height(), WinUI.CONTROL_CORNER_RADIUS, WinUI.CONTROL_CORNER_RADIUS)
         elif self.underMouse():
-            p.setBrush(QColor(WinUI.FILL_SUBTLE_TERTIARY))
+            p.setBrush(QColor(255, 255, 255, int(255 * 0.0419)))
             p.setPen(Qt.NoPen)
             p.drawRoundedRect(4, 0, self.width() - 8, self.height(), WinUI.CONTROL_CORNER_RADIUS, WinUI.CONTROL_CORNER_RADIUS)
         
         # Icon
         p.setFont(QFont('Segoe Fluent Icons', 14))
-        icon_color = WinUI.TEXT_PRIMARY if self._selected else WinUI.TEXT_SECONDARY
-        p.setPen(QColor(icon_color))
+        if self._selected:
+            p.setPen(QColor(255, 255, 255))
+        else:
+            p.setPen(QColor(255, 255, 255, int(255 * 0.786)))
         p.drawText(QRect(16, 0, 24, self.height()), Qt.AlignVCenter | Qt.AlignLeft, self._icon)
         
         # Text
         font = QFont('Segoe UI Variable', 13)
         font.setWeight(QFont.DemiBold if self._selected else QFont.Normal)
         p.setFont(font)
-        text_color = WinUI.TEXT_PRIMARY if self._selected or self.underMouse() else WinUI.TEXT_SECONDARY
-        p.setPen(QColor(text_color))
+        if self._selected or self.underMouse():
+            p.setPen(QColor(255, 255, 255))
+        else:
+            p.setPen(QColor(255, 255, 255, int(255 * 0.786)))
         p.drawText(QRect(52, 0, self.width() - 60, self.height()), Qt.AlignVCenter | Qt.AlignLeft, self._text)
 
 
@@ -1017,15 +1072,19 @@ class Win11HeroCard(QFrame):
         self.setFixedHeight(100)
         self.setCursor(Qt.PointingHandCursor)
         
-        # Solid background with accent tint
+        # Accent-tinted background with gradient overlay
         self.setStyleSheet(f"""
             QFrame {{
-                background: #1E3A5F;
-                border: 1px solid {WinUI.STROKE_CARD};
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+                    stop:0 rgba(0, 120, 212, 0.15), 
+                    stop:1 rgba(0, 120, 212, 0.05));
+                border: 1px solid {WinUI.STROKE_CONTROL_DEFAULT};
                 border-radius: {WinUI.CARD_CORNER_RADIUS}px;
             }}
             QFrame:hover {{
-                background: #234568;
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+                    stop:0 rgba(0, 120, 212, 0.2), 
+                    stop:1 rgba(0, 120, 212, 0.08));
             }}
         """)
         
@@ -1087,6 +1146,9 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         
+        # Track Mica state
+        self._mica_enabled = False
+        
         # Windows App ID for taskbar grouping
         try:
             ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(u'ape.v3.winui')
@@ -1106,16 +1168,18 @@ class MainWindow(QMainWindow):
             if os.path.exists(icon_path):
                 self.setWindowIcon(QIcon(icon_path))
         
-        # Apply stylesheet
-        self.setStyleSheet(get_stylesheet())
-        
-        # Apply Mica effect
+        # Apply Mica effect FIRST (before stylesheet)
         if MICA_AVAILABLE:
-            self.setAttribute(Qt.WA_TranslucentBackground)
             try:
+                self.setAttribute(Qt.WA_TranslucentBackground)
                 ApplyMica(int(self.winId()), MicaTheme.DARK, MicaStyle.DEFAULT)
-            except:
-                pass
+                self._mica_enabled = True
+            except Exception as e:
+                logging.warning(f"Mica not available: {e}")
+                self._mica_enabled = False
+        
+        # Apply stylesheet with Mica awareness
+        self.setStyleSheet(get_stylesheet(mica_enabled=self._mica_enabled))
         
         # Initialize modules
         self.downloader = VideoDownloader()
@@ -1147,11 +1211,17 @@ class MainWindow(QMainWindow):
         root_layout.setContentsMargins(0, 0, 0, 0)
         root_layout.setSpacing(0)
         
-        # Navigation Pane - solid background
+        # Navigation Pane - semi-transparent for Mica, solid fallback
         nav_pane = QFrame()
         nav_pane.setObjectName("navPane")
         nav_pane.setFixedWidth(280)
-        nav_pane.setStyleSheet(f"QFrame#navPane {{ background: {WinUI.BG_NAV}; }}")
+        nav_bg = WinUI.BG_LAYER_DEFAULT if self._mica_enabled else WinUI.BG_SOLID_SECONDARY
+        nav_pane.setStyleSheet(f"""
+            QFrame#navPane {{
+                background: {nav_bg};
+                border-right: 1px solid {WinUI.STROKE_DIVIDER};
+            }}
+        """)
         nav_layout = QVBoxLayout(nav_pane)
         nav_layout.setContentsMargins(12, 12, 12, 12)
         nav_layout.setSpacing(4)
@@ -1173,7 +1243,7 @@ class MainWindow(QMainWindow):
         
         # Navigation buttons container (for indicator positioning)
         nav_buttons_container = QWidget()
-        nav_buttons_container.setStyleSheet(f"background: {WinUI.BG_NAV};")
+        nav_buttons_container.setStyleSheet("background: transparent;")
         nav_buttons_layout = QVBoxLayout(nav_buttons_container)
         nav_buttons_layout.setContentsMargins(0, 0, 0, 0)
         nav_buttons_layout.setSpacing(4)
@@ -1206,15 +1276,17 @@ class MainWindow(QMainWindow):
         
         root_layout.addWidget(nav_pane)
         
-        # Separator
-        separator = QFrame()
-        separator.setFixedWidth(1)
-        separator.setStyleSheet(f"background: {WinUI.STROKE_DIVIDER};")
-        root_layout.addWidget(separator)
+        # Separator (hidden when Mica is enabled since nav pane has border)
+        if not self._mica_enabled:
+            separator = QFrame()
+            separator.setFixedWidth(1)
+            separator.setStyleSheet(f"background: {WinUI.STROKE_DIVIDER};")
+            root_layout.addWidget(separator)
         
-        # Content area - solid background
+        # Content area - transparent for Mica, solid fallback
         self.content_stack = QStackedWidget()
-        self.content_stack.setStyleSheet(f"background: {WinUI.BG_WINDOW};")
+        content_bg = "transparent" if self._mica_enabled else WinUI.BG_SOLID_BASE
+        self.content_stack.setStyleSheet(f"background: {content_bg};")
         
         # Opacity effect for transitions
         self.content_opacity = QGraphicsOpacityEffect(self.content_stack)
@@ -1282,10 +1354,10 @@ class MainWindow(QMainWindow):
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
         scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        scroll.setStyleSheet(f"QScrollArea {{ background: {WinUI.BG_WINDOW}; border: none; }}")
+        scroll.setStyleSheet("QScrollArea { background: transparent; border: none; }")
         
         content = QWidget()
-        content.setStyleSheet(f"background: {WinUI.BG_WINDOW};")
+        content.setStyleSheet("background: transparent;")
         layout = QVBoxLayout(content)
         layout.setContentsMargins(32, 24, 32, 24)
         layout.setSpacing(24)
@@ -1456,7 +1528,7 @@ class MainWindow(QMainWindow):
         page_layout.addWidget(scroll)
     
     def _build_history_page(self, parent):
-        parent.setStyleSheet(f"background: {WinUI.BG_WINDOW};")
+        parent.setStyleSheet("background: transparent;")
         layout = QVBoxLayout(parent)
         layout.setContentsMargins(32, 24, 32, 24)
         layout.setSpacing(16)
@@ -1496,7 +1568,7 @@ class MainWindow(QMainWindow):
                 font-family: 'Cascadia Code', 'Consolas', monospace;
                 font-size: 12px;
                 background: {WinUI.FILL_CONTROL_DEFAULT};
-                border: 1px solid {WinUI.STROKE_CONTROL};
+                border: 1px solid {WinUI.STROKE_CONTROL_DEFAULT};
                 border-radius: {WinUI.CARD_CORNER_RADIUS}px;
                 padding: 12px;
             }}
@@ -1507,10 +1579,10 @@ class MainWindow(QMainWindow):
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
         scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        scroll.setStyleSheet(f"QScrollArea {{ background: {WinUI.BG_WINDOW}; border: none; }}")
+        scroll.setStyleSheet("QScrollArea { background: transparent; border: none; }")
         
         content = QWidget()
-        content.setStyleSheet(f"background: {WinUI.BG_WINDOW};")
+        content.setStyleSheet("background: transparent;")
         layout = QVBoxLayout(content)
         layout.setContentsMargins(32, 24, 32, 24)
         layout.setSpacing(24)
