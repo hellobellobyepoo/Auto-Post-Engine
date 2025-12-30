@@ -1,0 +1,7 @@
+PySide6
+win32mica
+darkdetect
+yt-dlp
+moviepy
+selenium
+webdriver-manager
