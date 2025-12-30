@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+venv/
+env/
+
+# Logs
+*.log
+
+# OS junk
+Thumbs.db
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Build artifacts
+dist/
+build/
+
+# Cache
+.cache/
