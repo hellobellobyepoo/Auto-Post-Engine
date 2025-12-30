@@ -1,25 +1,65 @@
 # Python
 __pycache__/
 *.pyc
+*.py[cod]
 *.pyo
 *.pyd
-.env
+*$py.class
+*.so
+.Python
+
+# Build artifacts
+build/
+dist/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
 venv/
+ENV/
 env/
+.venv/
+.env
 
 # Logs
 *.log
+logs/*.txt
+logs/*.zip
+
+# Application specific
+downloads/*.mp4
+downloads/temp/
+processed/
+chrome_profile/
+brave_profile/
+edge_profile/
+*.db-journal
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
 
 # OS junk
 Thumbs.db
 .DS_Store
 
-# VS Code
-.vscode/
-
-# Build artifacts
-dist/
-build/
-
 # Cache
 .cache/
+
+# Sensitive
+config.json
+
