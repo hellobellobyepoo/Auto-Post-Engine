@@ -753,7 +753,7 @@ class Win11ComboBox(QPushButton):
         self.setStyleSheet(f"""
             QPushButton {{
                 background: {WinUI.FILL_CONTROL_DEFAULT};
-                border: 1px solid {WinUI.STROKE_CONTROL};
+                border: 1px solid {WinUI.STROKE_CONTROL_DEFAULT};
                 border-bottom: 1px solid {WinUI.STROKE_CONTROL_STRONG};
                 border-radius: {WinUI.CONTROL_CORNER_RADIUS}px;
                 color: {WinUI.TEXT_PRIMARY};
@@ -846,7 +846,7 @@ class Win11Flyout(QFrame):
         
         # Background - solid color
         p.setBrush(QColor(WinUI.BG_SOLID_TERTIARY))
-        p.setPen(QPen(QColor(WinUI.STROKE_CONTROL), 1))
+        p.setPen(QPen(QColor(WinUI.STROKE_CONTROL_DEFAULT), 1))
         p.drawRoundedRect(self.rect().adjusted(1, 1, -1, -1), WinUI.OVERLAY_CORNER_RADIUS, WinUI.OVERLAY_CORNER_RADIUS)
     
     def show_at(self, pos, width):
